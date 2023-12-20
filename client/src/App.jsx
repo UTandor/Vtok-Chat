@@ -2,9 +2,24 @@ import React, { useState, useEffect } from "react";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Register from "./components/Register";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
 function App() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const pathname = location;
+
+  const name = localStorage.getItem("name");
+  const password = localStorage.getItem("password");
+
+  useEffect(() => {
+      if (!name && !password && pathname !== '/register') {
+        return (
+          <div>You are not logged in </div>
+        )
+      }
+  }, []);
+
   return (
     <Routes>
       <Route element={<Login />} path="/login" />

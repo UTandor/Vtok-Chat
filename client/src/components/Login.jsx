@@ -1,20 +1,25 @@
 import { useState } from "react";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleRegister = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8080/users/login", { name: username, password: password })
+      .post("http://localhost:8080/users/login", { name, password })
       .then((res) => {
-        setUsername("");
-        setPassword("");
-        navigate('/home')
+        console.log(res);
+        if (res.status === 200) {
+          localStorage.setItem("name", name);
+          localStorage.setItem("password", password);
+          setName("");
+          setPassword("");
+          navigate("/home");
+        }
       })
       .catch((error) => console.error(error));
   };
@@ -23,9 +28,9 @@ const Login = () => {
       <form onSubmit={handleRegister}>
         <input
           type="text"
-          placeholder="Username"
-          onChange={(e) => setUsername(e.target.value)}
-          value={username}
+          placeholder="name"
+          onChange={(e) => setName(e.target.value)}
+          value={name}
         />
         <input
           type="text"

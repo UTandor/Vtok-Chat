@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const bcryptjs = require("bcryptjs");
 
 const User = require("../models/user");
 
@@ -24,27 +25,19 @@ router.get("/", (req, res) => {
     .catch((err) => res.json(err));
 });
 
-router.post("/login", async (req, res) => {
-  const { username, password } = req.body;
-
-  try {
-    const user = await User.findOne({ username });
-
-    if (!user) {
-      return res.status(401).json({ message: "Invalid username or password" });
+router.post("/login", (req, res) => {
+  const { name, password } = req.body;
+  User.findOne({ name: name }).then((user) => {
+    if (user) {
+      if (user.password === password) {
+        res.status(200).json("User created Successfully!");
+      } else {
+        res.status(401).json("Invalid Password.");
+      }
+    } else {
+      res.status(401).json("User not found.");
     }
-
-    const isPasswordValid = await bcryptjs.compare(password, user.password);
-
-    if (!isPasswordValid) {
-      return res.status(401).json({ message: "Invalid username or password" });
-    }
-
-    res.json({ message: "Login successful", user });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
+  });
 });
 
 router.put("/:id", (req, res) => {
@@ -60,11 +53,15 @@ router.put("/:id", (req, res) => {
     .catch((err) => res.json(err));
 });
 
-router.delete("/:id", (req, res) => {
-  const { id } = req.params;
-  User.findByIdAndDelete(id)
+router.delete("/:name", (req, res) => {
+  const { name } = req.params;
+  User.findOneAndDelete({ name })
     .then((result) => {
-      res.json({ message: "User deleted successfully" });
+      if (result) {
+        res.status(200).json({ message: "User deleted succesffuly" });
+      } else {
+        res.status(404).json({ message: "User not found!" });
+      }
     })
     .catch((err) => res.json(err));
 });
