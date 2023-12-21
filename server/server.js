@@ -10,8 +10,10 @@ app.use(cors());
 app.use(express.json());
 
 mongoose.connect(dbUrl);
-const userRouter = require("./routes/user");
+const userRouter = require("./routes/users");
+const messageRouter = require("./routes/messages");
 app.use("/users", userRouter);
+app.use("/messages", messageRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on ${PORT}`);

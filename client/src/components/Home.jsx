@@ -1,4 +1,5 @@
 import React from "react";
+import Chat from './Chat'
 import axios from "axios";
 
 const Home = () => {
@@ -27,6 +28,7 @@ const Home = () => {
     <div>
       <button onClick={handleLogout}>Log out</button>
       <button onClick={handleDelete}>Delete Account</button>
+      <Chat/>
     </div>
   );
 };
