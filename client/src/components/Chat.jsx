@@ -4,7 +4,7 @@ import axios from "axios";
 const Chat = () => {
   const [message, setMessage] = useState("");
   const [content, setContent] = useState([]);
-  const username = String(localStorage.getItem("username"));
+  const username = localStorage.getItem("name");
 
   useEffect(() => {
     fetchMessages();
@@ -15,6 +15,7 @@ const Chat = () => {
       .get("http://localhost:8080/messages")
       .then((response) => {
         setContent(response.data);
+        console.log(response)
       })
       .catch((e) => {
         console.error(e);
@@ -57,7 +58,7 @@ const Chat = () => {
         ) : (
           content.map((msg) => (
             <div key={msg._id}>
-              <h4>{msg.name}</h4>
+              <h4>{msg.sentBy}</h4>
               <p>{msg.content}</p>
             </div>
           ))

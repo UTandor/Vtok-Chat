@@ -26,19 +26,22 @@ router.get("/", (req, res) => {
 
 router.post("/login", (req, res) => {
   const { name, password } = req.body;
-  User.findOne({ name: name }).then((user) => {
-    if (user) {
-      if (user.password === password) {
-        res.status(200).json("User created Successfully!");
+  User.findOne({ name: name })
+    .then((user) => {
+      if (user) {
+        if (user.password === password) {
+          res.status(200).json("Login successful!");
+        } else {
+          res.status(401).json("Invalid password.");
+        }
       } else {
-        res.status(401).json("Invalid Password.");
+        res.status(404).json("User not found.");
       }
-    } else {
-      res.status(401).json("User not found.");
-    }
-  });
+    })
+    .catch((err) => {
+      res.status(500).json("Server error.");
+    });
 });
-
 router.put("/:id", (req, res) => {
   const { id } = req.params;
   User.findById(id)
