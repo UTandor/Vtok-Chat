@@ -12,7 +12,9 @@ const Home = () => {
   const handleDelete = () => {
     const name = localStorage.getItem("name");
     axios
-      .delete(`http://localhost:8080/users/${name}`)
+      .delete(
+        `https://vtokback.netlify.app/.netlify/functions/server/users/${name}`
+      )
       .then((response) => {
         console.log("User successfully deleted:", response.data);
         localStorage.removeItem("name");

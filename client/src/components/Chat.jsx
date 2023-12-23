@@ -12,7 +12,7 @@ const Chat = () => {
 
   function fetchMessages() {
     axios
-      .get("http://localhost:8080/messages")
+      .get("https://vtokback.netlify.app/.netlify/functions/server/messages")
       .then((response) => {
         setContent(response.data);
         console.log(response);
@@ -25,10 +25,13 @@ const Chat = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8080/messages", {
-        message: message,
-        sentBy: username,
-      })
+      .post(
+        "https://vtokback.netlify.app/.netlify/functions/server/messages",
+        {
+          message: message,
+          sentBy: username,
+        }
+      )
       .then((response) => {
         fetchMessages();
         setMessage("");
@@ -63,7 +66,9 @@ const Chat = () => {
                 className="flex gap-3 my-4 text-gray-600 text-sm flex-1"
               >
                 <span className="relative flex shrink-0 overflow-hidden rounded-full w-8 h-8">
-                  <div className="rounded-full w-full bg-gray-100 border p-1 items-center justify-center flex font-regular text-lg">{msg.sentBy[0]}</div>
+                  <div className="rounded-full w-full bg-gray-100 border p-1 items-center justify-center flex font-regular text-lg">
+                    {msg.sentBy[0]}
+                  </div>
                 </span>
                 <p className="leading-relaxed">
                   <span className="block font-bold text-gray-700">
@@ -100,3 +105,4 @@ const Chat = () => {
 };
 
 export default Chat;
+

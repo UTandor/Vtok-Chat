@@ -14,15 +14,21 @@ const Register = () => {
     e.preventDefault();
     if (password === confirmPassword) {
       axios
-        .post("http://localhost:8080/users/register", {
-          name: username,
-          password: password,
-        })
+        .post(
+          "https://vtokback.netlify.app/.netlify/functions/serverusers/register",
+          {
+            name: username,
+            password: password,
+          }
+        )
         .then((res) => {
           setUsername("");
           setPassword("");
           setConfirmPassword("");
-          localStorage.setItem('status', 'Account successfully registered. Please log in')
+          localStorage.setItem(
+            "status",
+            "Account successfully registered. Please log in"
+          );
           navigate("/login");
         })
         .catch((error) => console.error(error));

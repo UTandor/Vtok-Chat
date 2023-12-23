@@ -20,7 +20,10 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8080/users/login", { name, password })
+      .post(
+        "https://vtokback.netlify.app/.netlify/functions/serverusers/login",
+        { name, password }
+      )
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
