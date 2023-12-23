@@ -1,14 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import LoginSVG from "../../assets/LoginSVG";
-import LoginAlert from './LoginAlert'
+import LoginSVG from "./LoginSVG";
+import LoginAlert from "./LoginAlert";
 
 const Login = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedStatus = localStorage.getItem("status");
+    if (storedStatus) {
+      setStatus(storedStatus);
+    }
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -18,6 +25,13 @@ const Login = () => {
         console.log(res);
         if (res.status === 200) {
           setStatus("Log in successful, Redirecting!");
+          localStorage.clear();
+          localStorage.setItem("name", name);
+          localStorage.setItem("password", password);
+          localStorage.removeItem("status");
+          setTimeout(() => {
+            navigate("/home");
+          }, 1000);
         } else if (res.status === 401) {
           setStatus("Invalid username or password.");
         } else {
@@ -62,7 +76,6 @@ const Login = () => {
               <label
                 htmlFor="username"
                 className="block text-sm font-medium text-gray-700"
-                onChange={(e) => setName(e.target.value)}
                 value={name}
               >
                 Username
@@ -71,6 +84,7 @@ const Login = () => {
                 type="text"
                 id="username"
                 name="username"
+                onChange={(e) => setName(e.target.value)}
                 className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
               />
             </div>
@@ -101,12 +115,10 @@ const Login = () => {
             </div>
           </form>
           <div className="mt-4 text-sm text-gray-600 text-center">
-            <p>
-              Don't have an account?{" "}
-              <div href="#" className="text-black hover:underline">
-                <Link to="/register">Sign up here</Link>
-              </div>
-            </p>
+            <p>Don't have an account? </p>
+            <div href="#" className="text-black hover:underline">
+              <Link to="/register">Sign up here</Link>
+            </div>
           </div>
         </div>
       </div>

@@ -1,16 +1,23 @@
-import React from 'react';
+import React from "react";
 
 const LoginAlert = ({ status }) => {
   if (status === "") {
     return null;
   }
 
-  const alertColor = status === 'Log in successful, Redirecting!' ? 'bg-green-400' : 'bg-red-400';
+  const isSuccess =
+    status === "Log in successful, Redirecting!" ||
+    status === "Account successfully registered. Please log in";
+
+  const alertColor = isSuccess
+    ? "border border-gray-400 text-black"
+    : "bg-red-700";
+  const textColor = isSuccess ? "text-black" : "text-white";
 
   return (
     <div
       role="alert"
-      className={`relative flex w-full text-sm py-2 text-white rounded-lg font-semibold ${alertColor}`}
+      className={`relative flex w-full justify-center items-center text-sm py-2 text-white rounded-lg font-semibold ${alertColor}`}
     >
       <div className="shrink-0">
         <svg
@@ -19,7 +26,7 @@ const LoginAlert = ({ status }) => {
           viewBox="0 0 24 24"
           strokeWidth="2"
           stroke="currentColor"
-          className="w-6 h-6 ml-5 flex items-center justify-center"
+          className={`w-6 h-6 flex ${textColor}`}
         >
           <path
             strokeLinecap="round"
@@ -28,9 +35,7 @@ const LoginAlert = ({ status }) => {
           ></path>
         </svg>
       </div>
-      <div className="ml-3 mr-12">
-        {status}
-      </div>
+      <div className={`ml-3 mr-12 ${textColor}`}>{status}</div>
     </div>
   );
 };

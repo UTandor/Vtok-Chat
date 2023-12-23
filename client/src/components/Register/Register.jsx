@@ -22,6 +22,7 @@ const Register = () => {
           setUsername("");
           setPassword("");
           setConfirmPassword("");
+          localStorage.setItem('status', 'Account successfully registered. Please log in')
           navigate("/login");
         })
         .catch((error) => console.error(error));
