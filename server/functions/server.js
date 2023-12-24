@@ -10,7 +10,7 @@ const dbUrl =
   "mongodb+srv://ancrobot2244:deI3RAmjxFgKOgDe@cluster0.bhgwkdm.mongodb.net/production";
 
 const corsOptions = {
-  origin: "http://127.0.0.1:5173",
+  origin: "http://localhost:5173",
 };
 app.use(cors(corsOptions));
 app.use(express.json());
