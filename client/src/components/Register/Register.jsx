@@ -15,7 +15,7 @@ const Register = () => {
     if (password === confirmPassword) {
       axios
         .post(
-          "https://vtokback.netlify.app/.netlify/functions/serverusers/register",
+          "https://vtokback.netlify.app/.netlify/functions/server/users/register",
           {
             name: username,
             password: password,

@@ -21,7 +21,7 @@ const Login = () => {
     e.preventDefault();
     axios
       .post(
-        "https://vtokback.netlify.app/.netlify/functions/serverusers/login",
+        "https://vtokback.netlify.app/.netlify/functions/server/users/login",
         { name, password }
       )
       .then((res) => {
@@ -113,7 +113,7 @@ const Login = () => {
                 type="submit"
                 className="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300"
               >
-                Sign Up
+                Login
               </button>
             </div>
           </form>
