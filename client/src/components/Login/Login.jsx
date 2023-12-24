@@ -33,7 +33,7 @@ const Login = () => {
           localStorage.setItem("password", password);
           localStorage.removeItem("status");
           setTimeout(() => {
-            navigate("/home");
+            navigate("/");
           }, 1000);
         } else if (res.status === 401) {
           setStatus("Invalid username or password.");
