@@ -27,7 +27,7 @@ const Home = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen w-full flex-col">
+    <div className="flex justify-center bg-gray-100 items-center h-screen w-full flex-col">
       <div className="flex flex-row items-center justify-between w-screen px-[5%]">
         <button
           onClick={handleLogout}
