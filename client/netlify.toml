@@ -6,3 +6,5 @@ publish = "dist"
 from="/*"
 to="/index.html"
 status=200 
+https://vtok.netlify.app/
+https://vtok.netlify.app/

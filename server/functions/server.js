@@ -10,7 +10,7 @@ const dbUrl =
   "mongodb+srv://ancrobot2244:deI3RAmjxFgKOgDe@cluster0.bhgwkdm.mongodb.net/production";
 
 const corsOptions = {
-  origin: "https://vtok.netlify.app/",
+  origin: "https://vtok.netlify.app",
 };
 app.use(cors(corsOptions));
 app.use(express.json());
