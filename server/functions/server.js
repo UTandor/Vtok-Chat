@@ -7,7 +7,7 @@ const app = express();
 const router = express.Router();
 
 const dbUrl =
-  "mongodb+srv://ancrobot2244:KbjoZUMFF48TlSzK@cluster0.bhgwkdm.mongodb.net/production";
+  "mongodb+srv://ancrobot2244:Jahil341@cluster0.bhgwkdm.mongodb.net/production";
 
 const corsOptions = {
   origin: "https://vtok.netlify.app",
